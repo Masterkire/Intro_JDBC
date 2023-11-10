@@ -9,10 +9,19 @@ public class TestManejoPersonas {
         PersonaDAO personaDao = new PersonaDAO();
         
         //Insertando un nuevo objeto de tipo persona
-        Persona personaNueva = new Persona("Carlos", "Esparza", "cesparza@mail.com","5587652154");
-        personaDao.insertar(personaNueva);
+//        Persona personaNueva = new Persona("Carlos", "Esparza", "cesparza@mail.com","5587652154");
+//        personaDao.insertar(personaNueva);
         
+        //Modificar un objeto de persona existente
+//        Persona personaModificar = new Persona(4,"Juan Carlos", "Esparza", "jcesparza@mail.com", "5587652154");
+//        personaDao.actualizar(personaModificar);
+
+        //Eliminar un registro
+        Persona personaEliminar = new Persona(4);
+        personaDao.eliminar(personaEliminar);
+
         List<Persona> personas = personaDao.seleccionar();
+        
         personas.forEach(persona -> {
             System.out.println("persona = " + persona);
         });
