@@ -19,7 +19,8 @@ public class TestManejoPersonas {
         //Eliminar un registro
         Persona personaEliminar = new Persona(4);
         personaDao.eliminar(personaEliminar);
-
+        
+        //Listar en pantalla los datos de personas
         List<Persona> personas = personaDao.seleccionar();
         
         personas.forEach(persona -> {

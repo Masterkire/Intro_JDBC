@@ -5,8 +5,6 @@ import domain.Usuario;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class UsuarioDAO {
     private static final String SQL_SELECT = "SELECT id_usuario, usuario, password FROM usuario";
@@ -58,6 +56,52 @@ public class UsuarioDAO {
             stmt = conn.prepareStatement(SQL_INSERT);
             stmt.setString(1, usuario.getUsuario());
             stmt.setString(2, usuario.getPassword());
+            registros = stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            try {
+                close(stmt);
+                close(conn);
+            } catch (SQLException ex) {
+                ex.printStackTrace(System.out);
+            }
+        }
+        return registros;
+    }
+    
+    public int actualizar(Usuario usuario){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int registros = 0;
+        try {
+            conn = getConnection();
+            stmt = conn.prepareStatement(SQL_UPDATE);
+            stmt.setString(1, usuario.getUsuario());
+            stmt.setString(2, usuario.getPassword());
+            stmt.setInt(3, usuario.getIdUsuario());
+            registros = stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            try {
+                close(stmt);
+                close(conn);
+            } catch (SQLException ex) {
+                ex.printStackTrace(System.out);
+            }
+        }
+        return registros;
+    }
+    
+    public int eliminar(Usuario usuario){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int registros = 0;
+        try {
+            conn = getConnection();
+            stmt = conn.prepareStatement(SQL_DELETE);
+            stmt.setInt(1, usuario.getIdUsuario());
             registros = stmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
